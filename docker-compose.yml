@@ -2,14 +2,14 @@ version: '3.9'
 
 services:
   pipeline:
-    image: ci-cd-pipeline:latest
+    image: python-pipeline:latest
     container_name: pipeline
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8001:8001
-    command: ["node", "server.js"]
+      - 8000:8000
+    command: ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]
     networks:
       - app-net
 

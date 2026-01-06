@@ -38,6 +38,11 @@ jobs:
     - name: Run Pytest
       run: pytest
 
+    - name: DOCKER BUILD & RUN 
+      run : |
+        docker compose -f docker-compose.yml build
+        docker compose -f docker-compose.yml up -d
+
     # - name: Docker build
     #   run: docker build -t ci-cd-test:latest .
 

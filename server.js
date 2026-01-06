@@ -8,5 +8,5 @@ app.get("/", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5500;
+const PORT = 8001;
 app.listen(PORT, () => console.log(`hello welcome ${PORT}`));

@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  pipeline:
+    image: ci-cd-pipeline:latest
+    container_name: pipeline
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8001:8001
+    command: ["node", "server.js"]
+    networks:
+      - app-net
+
+  
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 80:80
+    depends_on:
+      - pipeline
+    networks:
+      - app-net
+
+networks:
+  app-net:
+
+  
+
+

@@ -34,9 +34,18 @@ jobs:
     - name: Run Test script
       run: npm test
 
-    - name: Docker build
-      run: docker build -t ci-cd-test:latest .
+    # - name: Docker build
+    #   run: docker build -t ci-cd-test:latest .
 
-    - name: Run Container
-      run: docker run -d -p 3000:5500 ci-cd-test:latest
+    # - name: Run Container
+    #   run: docker run -d -p 3000:5500 ci-cd-test:latest
+
+    - name: BUILD & PUSH TO HUB
+      env:
+         DOCKER_USERNAME: ${{secret.DOCKER_USERNAME}}
+         DOCKER_PASSWORD: ${{secret.DOCKER_PASSWORD}}
+      run: |  
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker build -t $DOCKER_USERNAME/ci-cd-test:latest .
+        docker push $DOCKER_USERNAME/ci-cd-test:latest
 

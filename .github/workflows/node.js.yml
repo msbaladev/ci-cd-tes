@@ -3,9 +3,14 @@
 
 name: ci-cd pipeline
 
+# on:
+#   push:
+#     branches: [ "master" ]
+
 on:
   push:
-    branches: [ "master" ]
+    tags:
+      - "v*"
 
 jobs:
   build:

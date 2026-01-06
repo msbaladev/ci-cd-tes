@@ -4,7 +4,7 @@ const app = express();
 
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "horray! how're you buddy !!!",
+    message: "horray! how're you buddy ! i'm good buddy !!!",
   });
 });
 

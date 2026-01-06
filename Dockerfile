@@ -1,19 +1,22 @@
-ARG NODE_VERSION=22.14.0-alpine
-FROM node:${NODE_VERSION}
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY requirements.txt ./
 
-RUN npm ci --only=production
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 
 COPY . .
 
-EXPOSE 8001
+EXPOSE 8000
 
-USER node
-
-CMD ["node", "server.js"]
+CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
 

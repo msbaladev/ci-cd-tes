@@ -1,1 +1,7 @@
 /node_modules
+/env
+
+**.pyc
+/.pytest_cache
+/__pycache__
+/fastapi_pipeline_test.egg-info

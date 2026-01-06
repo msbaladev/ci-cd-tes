@@ -38,5 +38,5 @@ jobs:
       run: docker build -t ci-cd-test:latest .
 
     - name: Run Container
-      run: docker run -d -p 3000:5500
+      run: docker run -d -p 3000:5500 ci-cd-test:latest
 

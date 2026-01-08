@@ -47,18 +47,9 @@ jobs:
     - name: DOCKER BUILD & RUN 
       run : |
         docker compose --profile app -f docker-compose.yml build
-        # docker compose --profile app -f docker-compose.yml up -d
-
-    - name: certificate installation
-      run: |
-        # docker compose stop nginx-server
-        docker compose up -d nginx
-        docker compose run --rm certbot
-        docker compose restart nginx
-
         docker compose --profile app -f docker-compose.yml up -d
 
-
+    
 
     # - name: Docker build
     #   run: docker build -t ci-cd-test:latest .

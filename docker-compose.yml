@@ -12,6 +12,7 @@ services:
     command: ["gunicorn", "ci_cd_test.wsgi:application", "--bind", "0.0.0.0:8000"]
     networks:
       - app-net
+    profiles: ["app"]
 
   
   nginx:
@@ -22,18 +23,42 @@ services:
       dockerfile: Dockerfile.nginx
     ports:
       - 80:80
-    
+      - 443:443
     volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - certbot-www:/var/www/certbot
+      - certbot-conf:/etc/letsencrypt
       - nginx-logs:/var/log/nginx
+
     depends_on:
       - pipeline
     networks:
       - app-net
+    profiles: ["app"]
+
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - certbot-www:/var/www/certbot
+  #     - certbot-conf:/etc/letsencrypt
+  #   command: >
+  #     certonly --webroot
+  #     -w /var/www/certbot
+  #     --email bala@gmail.com
+  #     --agree-tos
+  #     --no-eff-email
+  #     -d bala.au
+  #   profiles: ["certbot"]
+
+
+
+volumes:
+  certbot-www:
+  certbot-conf:
+  nginx-logs:
 
 networks:
   app-net:
-
-volumes:
-  nginx-logs:
 
 

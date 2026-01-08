@@ -51,7 +51,7 @@ jobs:
 
     - name: certificate installation
       run: |
-        docker compose stop nginx-server
+        # docker compose stop nginx-server
         docker compose up -d nginx
         docker compose run --rm certbot
         docker compose restart nginx

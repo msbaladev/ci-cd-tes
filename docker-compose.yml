@@ -37,19 +37,20 @@ services:
       - app-net
     profiles: ["app"]
 
-  # certbot:
-  #   image: certbot/certbot
-  #   volumes:
-  #     - certbot-www:/var/www/certbot
-  #     - certbot-conf:/etc/letsencrypt
-  #   command: >
-  #     certonly --webroot
-  #     -w /var/www/certbot
-  #     --email bala@gmail.com
-  #     --agree-tos
-  #     --no-eff-email
-  #     -d bala.au
-  #   profiles: ["certbot"]
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot-www:/var/www/certbot
+      - certbot-conf:/etc/letsencrypt
+    command: >
+      certonly --webroot
+      -w /var/www/certbot
+      --email balamurugan@inesssolutions.com
+      --agree-tos
+      --no-eff-email
+      -d cicd-testing.inesssolutions.net 
+      -d www.cicd-testing.inesssolutions.net
+    profiles: ["certbot"]
 
 
 

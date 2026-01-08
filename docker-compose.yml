@@ -2,14 +2,14 @@ version: '3.9'
 
 services:
   pipeline:
-    image: python-pipeline:latest
-    container_name: pipeline
+    image: django-pipeline:latest
+    container_name: django
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 8000:8000
-    command: ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]
+    command: ["gunicorn", "ci_cd_test.wsgi:application", "--bind", "0.0.0.0:8000"]
     networks:
       - app-net
 
@@ -22,6 +22,9 @@ services:
       dockerfile: Dockerfile.nginx
     ports:
       - 80:80
+    
+    volumes:
+      - nginx-logs:/var/log/nginx
     depends_on:
       - pipeline
     networks:
@@ -30,6 +33,7 @@ services:
 networks:
   app-net:
 
-  
+volumes:
+  nginx-logs:
 
 

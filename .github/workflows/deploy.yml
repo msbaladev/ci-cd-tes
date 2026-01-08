@@ -1,21 +1,27 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: ci-cd pipeline for python application
+name: ci-cd pipeline for django application
 
 
 #PYTHON -->
 
+
+# on:
+#   push:
+#     tags:
+#       - "v*"
+
 on:
   push:
-    branches: ['py-test']
+    branches: ['django']
 
 
 jobs:
   build:
 
-    # runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    # runs-on: self-hosted
 
     strategy:
       matrix:
@@ -30,13 +36,13 @@ jobs:
         cache: 'pip'
 
     - name: Install dependencies
-      run: pip install -e .
+      run: pip install -r requirements.txt .
     
-    - name: Test dependencies
-      run: pip install -e ".[dev]"
+    # - name: Test dependencies
+    #   run: pip install -e ".[dev]"
 
-    - name: Run Pytest
-      run: pytest
+    # - name: Run Pytest
+    #   run: pytest
 
     - name: DOCKER BUILD & RUN 
       run : |

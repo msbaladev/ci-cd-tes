@@ -1,10 +1,132 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CI/CD Pipeline Guide</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    HELLO
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+                CI/CD Pipeline
+            </h1>
+            <p class="text-xl text-gray-700 max-w-2xl mx-auto">
+                Continuous Integration & Continuous Delivery - Automate your software delivery
+            </p>
+        </div>
+
+        <!-- Pipeline Stages -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-blue-100">
+                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-2xl font-bold text-green-600">1</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Source</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Code changes committed to version control repository (GitHub, GitLab)
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-blue-100">
+                <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-2xl font-bold text-blue-600">2</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Build</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Automatically compile code and create executable artifacts
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-blue-100">
+                <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-2xl font-bold text-yellow-600">3</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Test</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Run automated unit, integration, and security tests
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-blue-100">
+                <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-2xl font-bold text-purple-600">4</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Deploy</h3>
+                <p class="text-gray-600 text-center leading-relaxed">
+                    Automatically deploy to staging/production environments
+                </p>
+            </div>
+        </div>
+
+        <!-- Pipeline Flow -->
+        <div class="bg-white rounded-3xl shadow-2xl p-12 mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Pipeline Flow</h2>
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="flex-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">→</div>
+                        <span class="text-lg font-semibold text-gray-700">Trigger: Code Push</span>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-6">✓</div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-gray-800">CI Stage</h4>
+                                <p class="text-gray-600">Build → Test → Package</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-6">🚀</div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-gray-800">CD Stage</h4>
+                                <p class="text-gray-600">Deploy → Verify → Monitor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:block w-px bg-gradient-to-b from-blue-200 to-purple-200"></div>
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="bg-gradient-to-r from-emerald-400 to-teal-500 text-white p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-4">Status: Success ✅</h3>
+                        <div class="space-y-2 text-sm">
+                            <div>Build Time: 2m 34s</div>
+                            <div>Tests: 1,247 passed</div>
+                            <div>Deployed: Production</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-10 rounded-3xl shadow-2xl">
+                <h3 class="text-3xl font-bold mb-6">Why CI/CD?</h3>
+                <ul class="space-y-4 text-lg">
+                    <li>⚡ <strong>Faster Releases</strong> - Deploy multiple times per day</li>
+                    <li>🛡️ <strong>Fewer Bugs</strong> - Automated testing catches issues early</li>
+                    <li>👥 <strong>Team Collaboration</strong> - Everyone works from same codebase</li>
+                    <li>📈 <strong>Scalable</strong> - Handles growth without manual processes</li>
+                </ul>
+            </div>
+            <div class="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6">Popular Tools</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">GitHub Actions</div>
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-100">Jenkins</div>
+                    <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">GitLab CI</div>
+                    <div class="bg-orange-50 p-4 rounded-xl border border-orange-100">CircleCI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-16 pt-12 border-t border-gray-200">
+            <p class="text-gray-500 text-lg">Ready to automate your deployments? 🚀</p>
+        </div>
+    </div>
 </body>
 </html>

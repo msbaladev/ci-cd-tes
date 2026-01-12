@@ -52,3 +52,5 @@ app.get("/health", async (req, res) => {
 
 const PORT = 5500;
 server.listen(PORT, () => console.log(`SERVER RUNNING ON PORT ${PORT}`));
+
+

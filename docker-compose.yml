@@ -1,0 +1,92 @@
+version: '3.9'
+
+
+services:
+  streamer:
+    image: streamer:latest
+    container_name: streamer
+    build:
+      context: streamer
+      dockerfile: Dockerfile
+    ports:
+      - "5500:5500"
+    command: ["node", "server.js"]
+    restart: unless-stopped
+    networks:
+      - app-net
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:5500/health"]
+    #   interval: 10s
+    #   timeout: 3s
+    #   retries: 5
+    profiles: ["app"]
+
+  termtrix:
+      image: termtrix:latest
+      container_name: termtrix
+      build:
+        context: my-app
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
+      command: ["node" ,"server.js"]
+      restart: unless-stopped
+      depends_on:
+        - streamer
+      networks:
+        - app-net
+      # healthcheck:
+      #   test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      #   interval: 10s
+      #   timeout: 3s
+      #   retries: 5
+      profiles: ["app"]
+
+  
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - certbot-www:/var/www/certbot
+      - certbot-conf:/etc/letsencrypt
+      - nginx-logs:/var/log/nginx
+
+    depends_on:
+      - pipeline
+    networks:
+      - app-net
+    profiles: ["app"]
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot-www:/var/www/certbot
+      - certbot-conf:/etc/letsencrypt
+    command: >
+      certonly --webroot
+      -w /var/www/certbot
+      --email balamurugan@inesssolutions.com
+      --agree-tos
+      --no-eff-email
+      -d cicd-testing.inesssolutions.net 
+      -d www.cicd-testing.inesssolutions.net
+    profiles: ["certbot"]
+
+
+
+volumes:
+  certbot-www:
+  certbot-conf:
+  nginx-logs:
+
+networks:
+  app-net:
+

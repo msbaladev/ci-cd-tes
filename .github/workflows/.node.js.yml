@@ -29,6 +29,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+          cache-dependency-path: my-app/package-lock.json  # Add this
+          working-directory: ./my-app
 
       - name: Install dependencies
         working-directory: ./my-app

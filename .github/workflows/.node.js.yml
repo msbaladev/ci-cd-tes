@@ -31,10 +31,10 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: cd my-app && npm ci
 
       - name: Build bundle
-        run: npm run build --if-present
+        run: cd my-app && npm run build --if-present
 
       - name: BUILD & RUN
         run: |

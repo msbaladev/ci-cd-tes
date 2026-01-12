@@ -60,7 +60,8 @@ services:
       - nginx-logs:/var/log/nginx
 
     depends_on:
-      - pipeline
+      - streamer
+      - termtrix
     networks:
       - app-net
     profiles: ["app"]

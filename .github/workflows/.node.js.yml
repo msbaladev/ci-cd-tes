@@ -24,6 +24,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Debug files
+        run: |
+          ls -la
+          ls -la my-app
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
